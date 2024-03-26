@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::post('/meals/store', [MealController::class, 'save']);
 Route::delete('/meals/{id}', [MealController::class, 'destroy']);
+Route::put('/meals/{id}', [MealController::class, 'update']);
 
 Route::get('/dashboard', function () {
     $meals = Meal::where('user_id', auth()->user()->id)->get();

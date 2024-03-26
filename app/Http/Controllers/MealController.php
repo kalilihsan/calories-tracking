@@ -28,4 +28,18 @@ class MealController extends Controller
         $meal->delete();
         return redirect('/dashboard');
     }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'meal' => 'required',
+            'calories' => 'required',
+        ]);
+
+        $meal = Meal::find($id);
+        $meal->user_id = auth()->user()->id;
+        $meal->meal = $request->meal;
+        $meal->calories = $request->calories;
+        $meal->save();
+        return redirect('/dashboard');
+    }
 }
