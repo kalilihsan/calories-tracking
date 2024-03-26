@@ -25,7 +25,20 @@
                                 <tr>
                                     <td class="border border-slate-300 w-1/3 text-center">{{ $meal->meal }}</td>
                                     <td class="border border-slate-300 w-1/3 text-center">{{ $meal->calories }}</td>
-                                    <td class="border border-slate-300 w-1/3 text-center">{{ __("Action") }}</td>
+                                    <td class="border border-slate-300 w-1/3 text-center">
+                                            <a href="" style="display: inline;">
+                                                <x-secondary-button>
+                                                    {{ __("Edit") }}
+                                                </x-secondary-button>
+                                            </a>
+                                            <form style="display: inline;" action="/meals/{{ $meal->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <x-danger-button>
+                                                    {{ __("Delete") }}
+                                                </x-danger-button>
+                                            </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -47,7 +60,8 @@
                     {{ __("Add new meal") }}
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action="" method="POST" id="meal-form">
+                    <form action="/meals/store" method="POST" id="meal-form">
+                        @csrf
                         <div class="grid grid-cols-4 gap-6">
                             <div class="col-start-2 col-end-3"> 
                                 <div class="grid grid-rows-4 gap-6">

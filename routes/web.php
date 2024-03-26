@@ -9,7 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::post('/meals/store', [MealController::class, 'save']);
+Route::delete('/meals/{id}', [MealController::class, 'destroy']);
 
 Route::get('/dashboard', function () {
     $meals = Meal::where('user_id', auth()->user()->id)->get();
